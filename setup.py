@@ -53,9 +53,28 @@ def extract(f):
 def command(cmd=None, install_packages=None):
 	if install_packages:
 		cmd = 'sudo apt-get install {}'.format(install_packages)
+		installing = True
+	else:
+		installing = False
 	print(cmd)
-	proc = subprocess.Popen(cmd.split())
-	proc.wait()
+	proc = subprocess.Popen(cmd.split(), stderr=subprocess.PIPE)
+	error_string = proc.communicate()[1].decode()
+	if installing and error_string:
+		package_remove = []
+		error_list = error_string.split('\n')
+		for error in error_list:
+			if 'Unable to locate package' in error:
+				package_remove.append(error.split()[-1])
+			print(error)
+			
+		proc.wait()
+
+		for bad_package in package_remove:
+			install_packages = install_packages.replace(bad_package, '', 1)
+			
+		return install_packages
+	else:
+		proc.wait()
 
 def download(url):
 	req = urllib.request.urlopen(url)
@@ -74,7 +93,10 @@ def setup(keyword, val=None):
 		geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
-		command(install_packages=val)
+		new = command(install_packages=val)
+		if new:
+			command(install_packages=new)
+		
 		
 	
 packages_dict = {
@@ -84,6 +106,7 @@ packages_dict = {
 	#package manager installs
 	'geany':'geany geany-plugins',
 	'basic':'gparted openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop',
+	#'basic':'man-db non-existing-package non-existing-package2 non-existing-package3 man-db'
 }
 
 for key, val in packages_dict.items():
