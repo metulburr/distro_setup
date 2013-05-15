@@ -104,18 +104,15 @@ def download(url):
 def setup(keyword, val=None):
 	print('setting up {}'.format(keyword))
 	if keyword == 'pygame':
-		'''pygame_install(val) #val == filename'''
+		pygame_install(val) #val == filename
 		print('pygame installation complete')
 	elif keyword == 'geany':
-		'''geany_install(val)'''
+		geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
-		'''
 		new = command(install_packages=val)
 		if new:
 			command(install_packages=new)
-		'''
-		pass
 	elif keyword == 'minecraft':
 		minecraft_install()
 		
@@ -125,6 +122,7 @@ packages_dict = {
 	#downloads
 	'pygame':'https://launchpad.net/debian/experimental/+source/pygame/1.9.2~pre~r3144-1/+files/pygame_1.9.2~pre~r3144.orig.tar.gz',
 	'minecraft':'https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar',
+	
 	#package manager installs
 	'geany':'geany geany-plugins',
 	'basic':'gparted openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
