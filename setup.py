@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+#things to add
+#https://github.com/python-imaging/Pillow donwload and install for pytohn3.x PIL module
+#update server to Rochester NY
+#install new video drivers
+#download, and install minecraft, dl texture packs, etc.
+
 import os
 import urllib.request
 import shutil
@@ -105,7 +111,7 @@ packages_dict = {
 	
 	#package manager installs
 	'geany':'geany geany-plugins',
-	'basic':'gparted openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop',
+	'basic':'gparted openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool',
 	#'basic':'man-db non-existing-package non-existing-package2 non-existing-package3 man-db'
 }
 
