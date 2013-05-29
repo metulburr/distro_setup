@@ -1,3 +1,5 @@
 python3.x
 
-fresh distro setup
+Ubuntu tested
+
+Auto download/setup/install of pygame for python3.x, geany config for python3.x, miniecraft, basic programs, 
