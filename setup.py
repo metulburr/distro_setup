@@ -9,6 +9,16 @@
 #download, and install minecraft, dl texture packs, etc.
 #https://bitbucket.org/prupe/mcpatcher
 #download sublime, setup crack
+#donwload and install BeautifulSoup 4 for python 2.x and 3.x
+	#http://www.crummy.com/software/BeautifulSoup/
+	#sudo python3 setup.py install
+
+#modify current
+#change geany to config colorschemes in
+	#vibrant-ink.conf save file to colorschemes
+	#~/.config/geany/colorschemes/
+	#and add colorschemes https://github.com/codebrainz/geany-themes
+	
 
 import os
 import urllib.request
@@ -107,14 +117,14 @@ def setup(keyword, val=None):
 		pygame_install(val) #val == filename
 		print('pygame installation complete')
 	elif keyword == 'geany':
-		geany_install(val)
+		#geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
 		new = command(install_packages=val)
 		if new:
 			command(install_packages=new)
 	elif keyword == 'minecraft':
-		minecraft_install()
+		...#minecraft_install()
 		
 		
 	
