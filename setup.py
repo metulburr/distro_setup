@@ -117,7 +117,7 @@ def setup(keyword, val=None):
 		pygame_install(val) #val == filename
 		print('pygame installation complete')
 	elif keyword == 'geany':
-		#geany_install(val)
+		geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
 		new = command(install_packages=val)
