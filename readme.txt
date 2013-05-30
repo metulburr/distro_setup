@@ -8,7 +8,7 @@ Purpose:
 Configurations:
 	geany IDE config
 	
-Python 3rd party modules installed for both python3.x and 2.x. Links to downloads do not search out latest patches/updates/versions yet. But all current versions installed support python3.x. If wanted to update a link, replace link value in dictionary of packages_dict.
+Python 3rd party modules installed for both python3.x and 2.x. Links to downloads do not search out latest patches/updates/versions yet. But all current versions installed support python3.x. If you want to update a link, in "mysetup.py", under the dictionary packages_dict,  replace the link value with the neew one.
 	pygame
 	pyglet
 	PyOpenGL
