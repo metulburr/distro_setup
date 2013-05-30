@@ -140,31 +140,27 @@ def download(url):
 def setup(keyword, val=None):
 	print('setting up {}'.format(keyword))
 	if keyword == 'pygame':
-		#pygame_install(val) #val == filename
+		pygame_install(val) #val == filename
 		print('pygame installation complete')
 	elif keyword == 'geany':
-		#geany_install(val)
+		geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
 		print()
-		#new = command(install_packages=val)
-		#if new:
-		#	command(install_packages=new)
+		new = command(install_packages=val)
+		if new:
+			command(install_packages=new)
 	elif keyword == 'minecraft':
-		print()
+		...
 		#minecraft_install()
 	elif keyword == 'pyglet':
-		print()
-		#python_3rd_party_install(val)
+		python_3rd_party_install(val)
 	elif keyword == 'pyopengl':
-		print()
-		#python_3rd_party_install(val)
+		python_3rd_party_install(val)
 	elif keyword == 'sel':
-		print()
-		#python_3rd_party_install(val)
+		python_3rd_party_install(val)
 	elif keyword == 'cx':
-		print()
-		#python_3rd_party_install(val)
+		python_3rd_party_install(val)
 	elif keyword == 'bottle':
 		python_3rd_party_install(val)
 		
