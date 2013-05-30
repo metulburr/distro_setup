@@ -4,22 +4,32 @@
 
 #things to add
 #https://github.com/python-imaging/Pillow donwload and install for pytohn3.x PIL module
-#update server to Rochester NY
 #install new video drivers
 #download, and install minecraft, dl texture packs, etc.
 #https://bitbucket.org/prupe/mcpatcher
 #download sublime, setup crack
 #donwload and install BeautifulSoup 4 for python 2.x and 3.x
 	#http://www.crummy.com/software/BeautifulSoup/
-	#sudo python3 setup.py install
 
 #modify current
 #change geany to config colorschemes in
 	#vibrant-ink.conf save file to colorschemes
 	#~/.config/geany/colorschemes/
-	#and add colorschemes https://github.com/codebrainz/geany-themes
-	
 
+#python 3.x packages
+	#pymunk
+	#pyglet DONE
+	#PyMySQL
+	#PyOpenGL DONE
+	#selenium DONE
+	#sympy
+	#Pillow
+	#fbconsole
+	#django
+	#cx_freeze
+	#bottle DONE
+	
+	
 import os
 import urllib.request
 import shutil
@@ -33,6 +43,22 @@ def pygame_install(name):
 	#download dependencies
 	command(install_packages='python3 python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev')
 	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pygame'))
+	command(cmd='sudo python3 setup.py install')
+'''
+def pyglet_install(name):
+	extract(name) 
+	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
+	command(cmd='sudo python3 setup.py install')
+
+def pyopengl_install(name):
+	extract(name) 
+	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
+	command(cmd='sudo python3 setup.py install')
+'''
+
+def python_3rd_party_install(name):
+	extract(name) 
+	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
 	command(cmd='sudo python3 setup.py install')
 		
 def geany_install(packages):
@@ -114,17 +140,33 @@ def download(url):
 def setup(keyword, val=None):
 	print('setting up {}'.format(keyword))
 	if keyword == 'pygame':
-		pygame_install(val) #val == filename
+		#pygame_install(val) #val == filename
 		print('pygame installation complete')
 	elif keyword == 'geany':
-		geany_install(val)
+		#geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
-		new = command(install_packages=val)
-		if new:
-			command(install_packages=new)
+		print()
+		#new = command(install_packages=val)
+		#if new:
+		#	command(install_packages=new)
 	elif keyword == 'minecraft':
-		...#minecraft_install()
+		print()
+		#minecraft_install()
+	elif keyword == 'pyglet':
+		print()
+		#python_3rd_party_install(val)
+	elif keyword == 'pyopengl':
+		print()
+		#python_3rd_party_install(val)
+	elif keyword == 'sel':
+		print()
+		#python_3rd_party_install(val)
+	elif keyword == 'cx':
+		print()
+		#python_3rd_party_install(val)
+	elif keyword == 'bottle':
+		python_3rd_party_install(val)
 		
 		
 	
@@ -132,10 +174,15 @@ packages_dict = {
 	#downloads
 	'pygame':'https://launchpad.net/debian/experimental/+source/pygame/1.9.2~pre~r3144-1/+files/pygame_1.9.2~pre~r3144.orig.tar.gz',
 	'minecraft':'https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar',
+	'pyglet':'http://pyglet.googlecode.com/files/pyglet-1.2alpha1.tar.gz',
+	'pyopengl':'https://pypi.python.org/packages/source/P/PyOpenGL/PyOpenGL-3.0.2.tar.gz',
+	'sel':'https://pypi.python.org/packages/source/s/selenium/selenium-2.33.0.tar.gz',
+	#'cx':'http://downloads.sourceforge.net/project/cx-freeze/4.3.1/cx_Freeze-4.3.1.tar.gz',
+	'bottle':'https://pypi.python.org/packages/source/b/bottle/bottle-0.11.3.tar.gz',
 	
 	#package manager installs
 	'geany':'geany geany-plugins',
-	'basic':'gparted openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
+	'basic':'gparted python-pygame python-bs4 python3-bs4 openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
 	#'basic':'man-db non-existing-package non-existing-package2 non-existing-package3 man-db'
 }
 

@@ -2,7 +2,7 @@ python3.x
 
 Ubuntu tested
 
-Auto download/setup/install of geany config for python3.x, minecraft, basic programs (VLC, wine, tmux, etc.), and some python 3rd party modules (whether it be ubuntu-repo's or manuel install):
+Auto download/setup/install of geany config for python3.x, minecraft, basic programs (VLC, wine, tmux, etc.), and some python 3rd party modules (whether it be ubuntu-repo's or manuel instal:
 	python3.x pygame
 	python3.x pyglet
 	python3.x PyOpenGL
