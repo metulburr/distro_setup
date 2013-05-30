@@ -16,17 +16,17 @@
 	#vibrant-ink.conf save file to colorschemes
 	#~/.config/geany/colorschemes/
 
-#python 3.x packages
-	#pymunk
+#python packages
+	#pymunk DONE
 	#pyglet DONE
-	#PyMySQL
+	#PyMySQL DONE
 	#PyOpenGL DONE
 	#selenium DONE
-	#sympy
-	#Pillow
-	#fbconsole
-	#django
-	#cx_freeze
+	#sympy DONE
+	#Pillow DONE
+	#fbconsole DONE
+	#django DONE
+	#cx_freeze 2DONE
 	#bottle DONE
 	
 	
@@ -36,6 +36,7 @@ import shutil
 import tarfile
 import subprocess
 import webbrowser
+import zipfile
 
 def pygame_install(name):
 	#extract tar, directory create is just pygame
@@ -45,21 +46,23 @@ def pygame_install(name):
 	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pygame'))
 	command(cmd='sudo python3 setup.py install')
 '''
-def pyglet_install(name):
+def python_3rd_party_install(name, stripper='.tar.gz'):
 	extract(name) 
-	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
-	command(cmd='sudo python3 setup.py install')
-
-def pyopengl_install(name):
-	extract(name) 
-	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
+	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip(stripper)))
 	command(cmd='sudo python3 setup.py install')
 '''
-
-def python_3rd_party_install(name):
-	extract(name) 
-	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip('.tar.gz')))
+	
+def python_3rd_party_install(f, stripper=None):
+	if not stripper:
+		s = '.tar.gz'
+	else:
+		s = stripper
+	extract(f)
+	filename = f.split(s)[0] #using this instead of os.path.splitext() because it did not parse some correctly
+	fullpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+	os.chdir(fullpath)
 	command(cmd='sudo python3 setup.py install')
+	command(cmd='sudo python2 setup.py install')
 		
 def geany_install(packages):
 	command(install_packages=packages)
@@ -89,19 +92,20 @@ def geany_install(packages):
 		
 def minecraft_install():
 	'''minecraft.jar already downloaded'''
-	
 	#need to auto download latest patcher automatically, manuel for now
 	mcpatcher_url = 'https://bitbucket.org/prupe/mcpatcher'
 	webbrowser.open(mcpatcher_url)
 			
 
 def extract(f):
-	filer = tarfile.open(f)
 	if tarfile.is_tarfile(f):
+		filer = tarfile.open(f)
 		print('extracting {}'.format(f))
 		filer.extractall()
-
-
+	elif f.endswith('.zip'):
+		zip = zipfile.ZipFile(f)
+		print('extracting {}'.format(f))
+		zip.extractall()
 	
 def command(cmd=None, install_packages=None):
 	if install_packages:
@@ -153,6 +157,16 @@ def setup(keyword, val=None):
 	elif keyword == 'minecraft':
 		...
 		#minecraft_install()
+	elif keyword == 'pillow':
+		python_3rd_party_install(val, '.zip')
+	elif keyword == 'pymunk':
+		python_3rd_party_install(val, '.zip')
+	elif keyword == 'sympy':
+		python_3rd_party_install(val, '-py3.2.tar.gz')
+		
+	else:
+		python_3rd_party_install(val)
+	'''
 	elif keyword == 'pyglet':
 		python_3rd_party_install(val)
 	elif keyword == 'pyopengl':
@@ -163,7 +177,13 @@ def setup(keyword, val=None):
 		python_3rd_party_install(val)
 	elif keyword == 'bottle':
 		python_3rd_party_install(val)
-		
+	elif keyword == 'pymysql':
+		python_3rd_party_install(val)
+	elif keyword == 'django':
+		python_3rd_party_install(val)
+	elif keyword == 'fbconsole':
+		python_3rd_party_install(val)
+	'''
 		
 	
 packages_dict = {
@@ -175,10 +195,16 @@ packages_dict = {
 	'sel':'https://pypi.python.org/packages/source/s/selenium/selenium-2.33.0.tar.gz',
 	#'cx':'http://downloads.sourceforge.net/project/cx-freeze/4.3.1/cx_Freeze-4.3.1.tar.gz',
 	'bottle':'https://pypi.python.org/packages/source/b/bottle/bottle-0.11.3.tar.gz',
+	'pymunk':'http://pymunk.googlecode.com/files/pymunk-3.0.0.zip',
+	'pymysql':'http://pymysql.googlecode.com/files/PyMySQL3-0.4.tar.gz',
+	'sympy':'http://sympy.googlecode.com/files/sympy-0.7.2-py3.2.tar.gz',
+	'pillow':'https://pypi.python.org/packages/source/P/Pillow/Pillow-2.0.0.zip',
+	'django':'https://pypi.python.org/packages/source/D/Django/Django-1.5.1.tar.gz',
+	'fbconsole':'https://pypi.python.org/packages/source/f/fbconsole/fbconsole-0.3.tar.gz',
 	
 	#package manager installs
 	'geany':'geany geany-plugins',
-	'basic':'gparted python-pygame python-bs4 python3-bs4 openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
+	'basic':'cx-freeze gparted python-pygame python-bs4 python3-bs4 openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
 	#'basic':'man-db non-existing-package non-existing-package2 non-existing-package3 man-db'
 }
 
