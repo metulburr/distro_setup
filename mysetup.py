@@ -94,13 +94,19 @@ def sublime_install(name):
 	if ch.lower() == 'y':
 		fullpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Sublime Text 2')
 		os.chdir(fullpath)
-		command('sudo apt-get install sed')
+		command(install_packages='sed')
 		command(cmd="sed {} sublime_text > cracked".format(repr(r's/\x33\x42/\x32\x42/g')))
 		command(cmd='sudo rm sublime_text')
 		command(cmd='mv cracked sublime_text')
 		command(cmd='chmod 777 sublime_text')
 		os.chdir('..')
 		webbrowser.open('license.txt')
+		
+def vim_setup():
+	print('setting up vim')
+	fullpath = os.path.join(os.environ['HOME'], '.vimrc')
+	#shutil.copy('vimrc', fullpath)
+	command(cmd='sudo cp vimrc {}'.format(fullpath))
 
 def extract(f):
 	if tarfile.is_tarfile(f):
@@ -211,21 +217,29 @@ packages_dict = {
 	'sympy':'http://sympy.googlecode.com/files/sympy-0.7.2-py3.2.tar.gz',
 	'pillow':'https://pypi.python.org/packages/source/P/Pillow/Pillow-2.0.0.zip',
 	'django':'https://pypi.python.org/packages/source/D/Django/Django-1.5.1.tar.gz',
-	'fbconsole':'https://pypi.python.org/packages/source/f/fbconsole/fbconsole-0.3.tar.gz',
+	'fbconsole':'https://pypi.python.org/packages/source/f/fbconsole/fbconsole-0.3.tar.gz'
 	#'sublime':'http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.1%20x64.tar.bz2',
-	
+}
+
+manager_installs = {
 	#package manager installs
 	'geany':'geany geany-plugins',
 	'basic':'python-pyside python3-pyside python-numpy python3-numpy python3-scipy python-scipy python-nmap python-matplotlib python3-matplotlib python-mysqldb python-flask python-gtk2 python-mechanize cx-freeze gparted python-pygame python-bs4 python3-bs4 openjdk-6-jdk openjdk-7-jdk vlc hwinfo python-dev xchat wine winetricks python-tk python3-tk k3b unetbootin tor eclipse nautilus-open-terminal libqt4-dev python-qt4 python3-pyqt4 git git-core git-gui git-doc python-pygame curl openbox obconf obmenu openbox-xdgmenu nitrogen grub-customizer mumble weechat weechat-curses terminator tmux ssh gufw gimp gmountiso deluge rtorrent nmap skype apache2 python-pip filezilla screen ghex firefox google-chrome-stable epiphany-browser steam blender desmume zsnes htop vim gconf-editor unity-tweak-tool dropbox',
 	#'basic':'man-db non-existing-package non-existing-package2 non-existing-package3 man-db'
 }
 
+for key, val in manager_installs.items():
+	setup(key, val)
+	
+vim_setup()
+
 for key, val in packages_dict.items():
-	if val.startswith('http'):
+	#if val.startswith('http'):
 		name = download(val)
 		setup(key, name)
-	else:
-		setup(key, val)
+	#else:
+	#	setup(key, val)
+
 print('Program Complete')
 
 
