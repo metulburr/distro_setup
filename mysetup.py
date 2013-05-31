@@ -45,12 +45,6 @@ def pygame_install(name):
 	command(install_packages='python3 python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev')
 	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pygame'))
 	command(cmd='sudo python3 setup.py install')
-'''
-def python_3rd_party_install(name, stripper='.tar.gz'):
-	extract(name) 
-	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), name.strip(stripper)))
-	command(cmd='sudo python3 setup.py install')
-'''
 	
 def python_3rd_party_install(f, stripper=None):
 	if not stripper:
@@ -68,6 +62,9 @@ def geany_install(packages):
 	command(install_packages=packages)
 	choice = input('Use python3 for geany run command default? [y/n] ')
 	if choice.lower() == 'y':
+		schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
+		command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
+		
 		fullpath = '/usr/share/geany/filetypes.python'
 		print('modifying {}'.format(fullpath))
 		
@@ -166,6 +163,13 @@ def setup(keyword, val=None):
 		
 	else:
 		python_3rd_party_install(val)
+		
+def test_setup(keyword, val=None):
+	
+	
+	
+	
+	
 	'''
 	elif keyword == 'pyglet':
 		python_3rd_party_install(val)
@@ -211,8 +215,8 @@ packages_dict = {
 for key, val in packages_dict.items():
 	if val.startswith('http'):
 		name = download(val)
-		setup(key, name)
+		test_setup(key, name)
 	else:
-		setup(key, val)
+		test_setup(key, val)
 
 
