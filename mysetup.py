@@ -3,31 +3,9 @@
 #ubuntu setup script
 
 #things to add
-#https://github.com/python-imaging/Pillow donwload and install for pytohn3.x PIL module
 #install new video drivers
 #download, and install minecraft, dl texture packs, etc.
-#https://bitbucket.org/prupe/mcpatcher
-#download sublime, setup crack
-#donwload and install BeautifulSoup 4 for python 2.x and 3.x
-	#http://www.crummy.com/software/BeautifulSoup/
 
-#modify current
-#change geany to config colorschemes in
-	#vibrant-ink.conf save file to colorschemes
-	#~/.config/geany/colorschemes/
-
-#python packages
-	#pymunk DONE
-	#pyglet DONE
-	#PyMySQL DONE
-	#PyOpenGL DONE
-	#selenium DONE
-	#sympy DONE
-	#Pillow DONE
-	#fbconsole DONE
-	#django DONE
-	#cx_freeze 2DONE
-	#bottle DONE
 	
 	
 import os
