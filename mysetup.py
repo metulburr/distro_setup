@@ -164,10 +164,7 @@ def setup(keyword, val=None):
 	else:
 		python_3rd_party_install(val)
 		
-def test_setup(keyword, val=None):
-	
-	
-	
+
 	
 	
 	'''
@@ -215,8 +212,8 @@ packages_dict = {
 for key, val in packages_dict.items():
 	if val.startswith('http'):
 		name = download(val)
-		test_setup(key, name)
+		setup(key, name)
 	else:
-		test_setup(key, val)
+		setup(key, val)
 
 
