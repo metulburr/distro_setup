@@ -36,6 +36,7 @@ import shutil
 import tarfile
 import subprocess
 import zipfile
+import webbrowser
 
 def pygame_install(name):
 	#extract tar, directory create is just pygame
@@ -108,7 +109,20 @@ def minecraft_install():
 
 	new_url = 'https://github.com' +  urlpath
 	download(new_url)
-			
+	
+def sublime_install(name):
+	extract(name)
+	ch = input('Crack Sublime Text 2 to be registered? [Y/N] Input all of license into sublime_test (open) -> Help -> Enter License (including the BEGIN/END license part [Y/N]')
+	if ch.lower() == 'y':
+		fullpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Sublime Text 2')
+		os.chdir(fullpath)
+		command('sudo apt-get install sed')
+		command(cmd="sed {} sublime_text > cracked".format(repr(r's/\x33\x42/\x32\x42/g')))
+		command(cmd='sudo rm sublime_text')
+		command(cmd='mv cracked sublime_text')
+		command(cmd='chmod 777 sublime_text')
+		os.chdir('..')
+		webbrowser.open('license.txt')
 
 def extract(f):
 	if tarfile.is_tarfile(f):
@@ -177,10 +191,11 @@ def setup(keyword, val=None):
 		python_3rd_party_install(val, '.zip')
 	elif keyword == 'sympy':
 		python_3rd_party_install(val, '-py3.2.tar.gz')
-		
+	#if keyword == 'sublime':
+	#	sublime_install(val)
 	else:
 		python_3rd_party_install(val)
-		
+
 
 	
 	
@@ -219,6 +234,7 @@ packages_dict = {
 	'pillow':'https://pypi.python.org/packages/source/P/Pillow/Pillow-2.0.0.zip',
 	'django':'https://pypi.python.org/packages/source/D/Django/Django-1.5.1.tar.gz',
 	'fbconsole':'https://pypi.python.org/packages/source/f/fbconsole/fbconsole-0.3.tar.gz',
+	#'sublime':'http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.1%20x64.tar.bz2',
 	
 	#package manager installs
 	'geany':'geany geany-plugins',
