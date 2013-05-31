@@ -44,6 +44,7 @@ def pygame_install(name):
 	#download dependencies
 	command(install_packages='python3 python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev')
 	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pygame'))
+	print('PRESS ENTER!!!')
 	command(cmd='sudo python3 setup.py install')
 	os.chdir('..')
 	
@@ -63,8 +64,10 @@ def python_3rd_party_install(f, stripper=None):
 def geany_install(packages):
 	command(install_packages=packages)
 	schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
-	command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
-	choice = input('Use python3 for geany run command default? [y/n] ')
+	#command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
+	new_schemepath = os.path.join(os.environ['HOME'], '.config/geany/colorschemes')
+	command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath ))
+	choice = input('Change geany default to run python3.x instead? [y/n] ')
 	if choice.lower() == 'y':
 		
 		fullpath = '/usr/share/geany/filetypes.python'
@@ -219,5 +222,6 @@ for key, val in packages_dict.items():
 		setup(key, name)
 	else:
 		setup(key, val)
+print('Program Complete')
 
 
