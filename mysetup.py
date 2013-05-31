@@ -60,10 +60,10 @@ def python_3rd_party_install(f, stripper=None):
 		
 def geany_install(packages):
 	command(install_packages=packages)
+	schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
+	command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
 	choice = input('Use python3 for geany run command default? [y/n] ')
 	if choice.lower() == 'y':
-		schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
-		command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
 		
 		fullpath = '/usr/share/geany/filetypes.python'
 		print('modifying {}'.format(fullpath))
