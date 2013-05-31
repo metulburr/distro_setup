@@ -35,7 +35,6 @@ import urllib.request
 import shutil
 import tarfile
 import subprocess
-import webbrowser
 import zipfile
 
 def pygame_install(name):
@@ -93,10 +92,22 @@ def geany_install(packages):
 		command(cmd='sudo mv {} {}'.format(name, path))
 		
 def minecraft_install():
-	'''minecraft.jar already downloaded'''
-	#need to auto download latest patcher automatically, manuel for now
-	mcpatcher_url = 'https://bitbucket.org/prupe/mcpatcher'
-	webbrowser.open(mcpatcher_url)
+	
+	#attempt to get latest mcpatcher if beautifulsoup is installed
+	try:
+		from bs4 import BeautifulSoup
+	except ImportError:
+		return
+	url = 'https://github.com/pclewis/mcpatcher/downloads'
+	res = urllib.request.urlopen(url)
+	html = res.read().decode()
+
+	soup = BeautifulSoup(html)
+	tags = soup.findAll('li', {'class', 'ctype-unknown'})
+	urlpath = tags[1].find('a')['href'] #latest jar mcparcher version path
+
+	new_url = 'https://github.com' +  urlpath
+	download(new_url)
 			
 
 def extract(f):
@@ -159,8 +170,7 @@ def setup(keyword, val=None):
 		if new:
 			command(install_packages=new)
 	elif keyword == 'minecraft':
-		...
-		#minecraft_install()
+		minecraft_install()
 	elif keyword == 'pillow':
 		python_3rd_party_install(val, '.zip')
 	elif keyword == 'pymunk':
