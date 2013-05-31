@@ -45,6 +45,7 @@ def pygame_install(name):
 	command(install_packages='python3 python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev')
 	os.chdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pygame'))
 	command(cmd='sudo python3 setup.py install')
+	os.chdir('..')
 	
 def python_3rd_party_install(f, stripper=None):
 	if not stripper:
@@ -57,6 +58,7 @@ def python_3rd_party_install(f, stripper=None):
 	os.chdir(fullpath)
 	command(cmd='sudo python3 setup.py install')
 	command(cmd='sudo python2 setup.py install')
+	os.chdir('..')
 		
 def geany_install(packages):
 	command(install_packages=packages)
@@ -113,6 +115,8 @@ def command(cmd=None, install_packages=None):
 	print(cmd)
 	proc = subprocess.Popen(cmd.split(), stderr=subprocess.PIPE)
 	error_string = proc.communicate()[1].decode()
+	if error_string:
+		print(error_string)
 	if installing and error_string:
 		package_remove = []
 		error_list = error_string.split('\n')
