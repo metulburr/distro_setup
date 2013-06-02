@@ -15,6 +15,7 @@ import tarfile
 import subprocess
 import zipfile
 import webbrowser
+import getpass
 
 def pygame_install(name):
 	#extract tar, directory create is just pygame
@@ -101,6 +102,22 @@ def sublime_install(name):
 		command(cmd='chmod 777 sublime_text')
 		os.chdir('..')
 		webbrowser.open('license.txt')
+		
+def github_config():
+    ch = input('auto authenticate on github.com? [y/n] ')
+    if ch.lower() == 'y':
+        username = input('github.com username: ')
+        password = getpass.getpass('github.com password: ')
+        s = '''machine github.com
+            login {}
+            password {}
+        '''.format(username, password)
+
+        f = open(os.path.join(os.environ['HOME'], '.netrc'))
+        if s not in f.read():
+            f = open(os.path.join(os.environ['HOME'], '.netrc'), 'w')
+            f.write(s)
+            f.close()
 		
 def vim_setup():
 	print('setting up vim')
@@ -239,7 +256,7 @@ for key, val in packages_dict.items():
 		setup(key, name)
 	#else:
 	#	setup(key, val)
-
+github_config()
 print('Program Complete')
 
 
