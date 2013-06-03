@@ -115,7 +115,7 @@ def github_config():
 
         f = open(os.path.join(os.environ['HOME'], '.netrc'))
         if s not in f.read():
-            f = open(os.path.join(os.environ['HOME'], '.netrc'), 'w')
+            f = open(os.path.join(os.environ['HOME'], '.netrc'), 'a')
             f.write(s)
             f.close()
 		
