@@ -180,10 +180,11 @@ def setup(keyword, val=None):
 		geany_install(val)
 		print('geany installation complete')
 	elif keyword == 'basic':
-		print()
-		new = command(install_packages=val)
-		if new:
-			command(install_packages=new)
+		ch = input('Are you sure you want to install these repo\'s? \n{} \n[y/n]'.format(val))
+		if ch.lower() == 'y':
+			new = command(install_packages=val)
+			if new:
+				command(install_packages=new)
 	elif keyword == 'minecraft':
 		minecraft_install()
 	elif keyword == 'pillow':
@@ -197,27 +198,6 @@ def setup(keyword, val=None):
 	else:
 		python_3rd_party_install(val)
 
-
-	
-	
-	'''
-	elif keyword == 'pyglet':
-		python_3rd_party_install(val)
-	elif keyword == 'pyopengl':
-		python_3rd_party_install(val)
-	elif keyword == 'sel':
-		python_3rd_party_install(val)
-	elif keyword == 'cx':
-		python_3rd_party_install(val)
-	elif keyword == 'bottle':
-		python_3rd_party_install(val)
-	elif keyword == 'pymysql':
-		python_3rd_party_install(val)
-	elif keyword == 'django':
-		python_3rd_party_install(val)
-	elif keyword == 'fbconsole':
-		python_3rd_party_install(val)
-	'''
 		
 	
 packages_dict = {
