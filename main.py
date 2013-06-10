@@ -45,7 +45,9 @@ def geany_install(packages):
 	schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
 	#command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
 	new_schemepath = os.path.join(os.environ['HOME'], '.config/geany/colorschemes')
+	new_schemepath2 = '/usr/share/geany/colorschemes'
 	command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath ))
+	command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath2))
 	choice = input('Change geany default to run python3.x instead? [y/n] ')
 	if choice.lower() == 'y':
 		
