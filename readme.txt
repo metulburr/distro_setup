@@ -48,3 +48,6 @@ Basic installs:
 		downloads minecraft.jar
 		if beautifulsoup installed upon execution: will download latest mcpatcher from github
 	
+non-auto files:
+	sudo bash watermark_remove.sh (for ubuntu 13.04 AMD hardware unsupported water mark)
+	reboot
