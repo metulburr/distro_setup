@@ -7,6 +7,7 @@
 #download, and install minecraft, dl texture packs, etc.
 
 #SFML C++ build.... g++ -Wall -o "%e" "%f" -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+#http://en.sfml-dev.org/forums/index.php?topic=11338.0
 
 	
 	
