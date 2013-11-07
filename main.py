@@ -5,10 +5,7 @@
 #things to add
 #install new video drivers
 #download, and install minecraft, dl texture packs, etc.
-
-#SFML C++ build.... g++ -Wall -o "%e" "%f" -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
-#http://en.sfml-dev.org/forums/index.php?topic=11338.0
-
+#update mcpatcher latest download
     
     
 import os
@@ -83,6 +80,7 @@ def minecraft_install():
         from bs4 import BeautifulSoup
     except ImportError:
         return
+    #new url  http://www.6minecraft.net/mcpatcher-hd-fix-download/
     url = 'https://github.com/pclewis/mcpatcher/downloads'
     res = urllib.request.urlopen(url)
     html = res.read().decode()
@@ -244,7 +242,7 @@ def setup(keyword, val=None):
 packages_dict = {
     #downloads
     'pygame':'https://launchpad.net/debian/experimental/+source/pygame/1.9.2~pre~r3144-1/+files/pygame_1.9.2~pre~r3144.orig.tar.gz',
-    'minecraft':'https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar',
+    #'minecraft':'https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar',
     'pyglet':'http://pyglet.googlecode.com/files/pyglet-1.2alpha1.tar.gz',
     'pyopengl':'https://pypi.python.org/packages/source/P/PyOpenGL/PyOpenGL-3.0.2.tar.gz',
     'sel':'https://pypi.python.org/packages/source/s/selenium/selenium-2.33.0.tar.gz',
@@ -263,6 +261,7 @@ packages_dict = {
 vim_setup()
 update_gcc()
 sfml_install()
+#github_config()
 
 manager_installs = {
     #package manager installs
@@ -282,8 +281,6 @@ for key, val in packages_dict.items():
         setup(key, name)
     #else:
     #   setup(key, val)
-#github_config()
-
 
 print('Program Complete')
 
