@@ -1,4 +1,4 @@
-python3.x
+python3.x/python2.x
 Ubuntu tested
 
 Purpose:
