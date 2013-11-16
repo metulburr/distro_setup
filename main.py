@@ -45,37 +45,37 @@ def python_3rd_party_install(f, stripper=None):
     os.chdir('..')
         
 def geany_install(packages):
-    command(install_packages=packages)
-    schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
-    #command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
-    new_schemepath = os.path.join(os.environ['HOME'], '.config/geany/colorschemes')
-    new_schemepath2 = '/usr/share/geany/colorschemes'
-    command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath ))
-    command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath2))
-    choice = input('Change geany default to run python3.x instead? [y/n] ')
-    if choice.lower() == 'y':
+	command(install_packages=packages)
+	schemepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemes')
+	#command(cmd='sudo cp {}/* ~/.config/geany/colorschemes/'.format(schemepath))
+	new_schemepath = os.path.join(os.environ['HOME'], '.config/geany/colorschemes')
+	new_schemepath2 = '/usr/share/geany/colorschemes'
+	command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath ))
+	command(cmd='sudo cp -r {} {}'.format(schemepath, new_schemepath2))
+	#choice = input('Change geany default to run python3.x instead? [y/n] ')
+	#if choice.lower() == 'y':
         
-        fullpath = '/usr/share/geany/filetypes.python'
-        print('modifying {}'.format(fullpath))
-        
-        f = open(fullpath)
-        file_list = f.readlines()
-        for line in file_list:
-            ind = file_list.index(line)
-            if 'compiler=' in line:
-                file_list[ind] = 'compiler=python3 -m py_compile "%f"\n'
-            elif 'run_cmd' in line:
-                file_list[ind] = 'run_cmd=python3 "%f"\n'
+	fullpath = '/usr/share/geany/filetypes.python'
+	print('modifying {}'.format(fullpath))
 
-        command('sudo rm {}'.format(fullpath))
-        name = os.path.split(fullpath)[1]
-        path = os.path.split(fullpath)[0]
-        print('creating new {}'.format(name))
-        new = open(name, 'w')
-        for line in file_list:
-            new.write(line)
-        new.close()
-        command(cmd='sudo mv {} {}'.format(name, path))
+	f = open(fullpath)
+	file_list = f.readlines()
+	for line in file_list:
+	    ind = file_list.index(line)
+	    if 'compiler=' in line:
+		file_list[ind] = 'compiler=python3 -m py_compile "%f"\n'
+	    elif 'run_cmd' in line:
+		file_list[ind] = 'run_cmd=python3 "%f"\n'
+
+	command('sudo rm {}'.format(fullpath))
+	name = os.path.split(fullpath)[1]
+	path = os.path.split(fullpath)[0]
+	print('creating new {}'.format(name))
+	new = open(name, 'w')
+	for line in file_list:
+	    new.write(line)
+	new.close()
+	command(cmd='sudo mv {} {}'.format(name, path))
         
 def minecraft_install():
     
@@ -222,11 +222,11 @@ def setup(keyword, val=None):
         geany_install(val)
         print('geany installation complete')
     elif keyword == 'basic':
-        ch = input('Are you sure you want to install these repo\'s? \n{} \n[y/n]'.format(val))
-        if ch.lower() == 'y':
-            new = command(install_packages=val)
-            if new:
-                command(install_packages=new)
+        #ch = input('Are you sure you want to install these repo\'s? \n{} \n[y/n]'.format(val))
+        #if ch.lower() == 'y':
+        new = command(install_packages=val)
+        if new:
+            command(install_packages=new)
     elif keyword == 'minecraft':
         minecraft_install()
     elif keyword == 'pillow':
