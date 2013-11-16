@@ -150,7 +150,7 @@ def command(cmd=None, install_packages=None):
         installing = False
     print(cmd)
     proc = subprocess.Popen(cmd.split(), stderr=subprocess.PIPE)
-    error_string = proc.communicate()[1].decode()
+    error_string = proc.communicate()[1].decode(errors='ignore')
     if error_string:
         print(error_string)
     if installing and error_string:
