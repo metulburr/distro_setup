@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 #ubuntu setup script
 
@@ -9,13 +9,17 @@
     
     
 import os
-import urllib.request
+try:
+    import urllib.request as REQ
+except ImportError:
+    import urllib2 as REQ
 import shutil
 import tarfile
 import subprocess
 import zipfile
 import webbrowser
 import getpass
+import time
 
 def pygame_install(name):
     #extract tar, directory create is just pygame
@@ -82,7 +86,7 @@ def minecraft_install():
         return
     #new url  http://www.6minecraft.net/mcpatcher-hd-fix-download/
     url = 'https://github.com/pclewis/mcpatcher/downloads'
-    res = urllib.request.urlopen(url)
+    res = REQ.urlopen(url)
     html = res.read().decode()
 
     soup = BeautifulSoup(html)
@@ -167,7 +171,7 @@ def command(cmd=None, install_packages=None):
         proc.wait()
 
 def download(url):
-    req = urllib.request.urlopen(url)
+    req = REQ.urlopen(url)
     filename = os.path.split(url)[1]
     print('downloading {}'.format(filename))
     with open(filename,'wb') as f:
@@ -179,9 +183,7 @@ def sfml_install():
     sfml_21_64bit = 'http://www.sfml-dev.org/download/sfml/2.1/SFML-2.1-linux-gcc-64bits.tar.bz2'
     name = download(sfml_21_64bit)
     extract(name)
-    
-    filename = f.split(s)[0] #using this instead of os.path.splitext() because it did not parse some correctly
-    fullpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+    fullpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "SFML-2.1")
     os.chdir(fullpath)
     
     p = subprocess.Popen('sudo cp -r include/SFML /usr/include'.split())
